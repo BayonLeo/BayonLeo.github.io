@@ -646,6 +646,7 @@ body {
     0 0 0 8px rgba(30, 0, 255, 0.449),
     0 0 20px rgb(28, 5, 232);
     animation: animate 3s linear infinite;
+    overflow-y: hidden;
   }
   
   span:before {

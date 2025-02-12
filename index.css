@@ -4,12 +4,6 @@
     box-sizing: border-box;
 }
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
 body {
   width: 100%;
   overflow:hidden;
@@ -18,7 +12,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(to bottom, #000 0%, #282369 100%);
+  background: linear-gradient(to bottom, #000000 0%, #26084c 100%);
 }
 
 .galaxy {
@@ -603,19 +597,6 @@ body {
   }
 }
 
-.stars {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100vh;
-    background-color: #000000;
-    background-repeat: none;
-    background-position-x: center;
-    background-size: cover;
-    animation: animateBg 50s linear infinite;
-  }
-  
   @keyframes animateBg {
     0%,100% {
         transform: scale(1);
@@ -754,11 +735,10 @@ body {
 
   h1 {
     display: block;
-    color: #fff;
+    color: #f1e1ff;
     font-weight: 800;
     font-size: 4em;
     letter-spacing: -2px;
-    font-family: starborn, sans-serif;
     text-align: center;
-    text-shadow: 2px 3px 2px rgba(0, 0, 0, .6);
+    text-shadow: 2px 3px 2px rgba(10, 0, 10, .6);
   }

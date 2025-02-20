@@ -4,19 +4,39 @@
     box-sizing: border-box;
 }
 
+::-webkit-scrollbar {
+  display: none;
+}
+
+html {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.container {
+  scroll-snap-type: y mandatory;
+}
+
 .home{
-  height: 100vh;
-  width: 100%;
   background: linear-gradient(to bottom, #000000 0%, #26084c 100%);
 }
 
-.home, .about {
+.about{
+  background: linear-gradient(to bottom, #26084c 0%, #000000 100%);
+}
+
+.projects{
+  background: linear-gradient(to bottom, #000000 0%, #08094c 100%);
+}
+
+.home, .about, .projects {
   width: 100%;
 }
 
 section .content{
   width: 80%;
-  margin: 40px auto;
+  margin: auto;
+  padding-top: 5%;
   font-family: 'Poppins', sans-serif;
 }
 
@@ -39,6 +59,7 @@ body {
   justify-content: flex-start;
   width: 100%;
   height: auto;
+  scroll-behavior: smooth;
   overflow-x: hidden;
 }
 
@@ -646,7 +667,7 @@ body {
     0 0 0 8px rgba(30, 0, 255, 0.449),
     0 0 20px rgb(28, 5, 232);
     animation: animate 3s linear infinite;
-    overflow-y: hidden;
+    z-index: 1;
   }
   
   span:before {
@@ -780,7 +801,7 @@ body {
   }
   
   section .title div{
-    color: #0E2431;
+    color: #f1e1ff;
     font-size: 30px;
     font-weight: 600;
     position: relative;
@@ -816,14 +837,14 @@ section .title div::after{
   width: 55%;
 }
 section  .topic{
-  color: #0E2431;
+  color: #f1e1ff;
   font-size: 25px;
   font-weight: 500;
   margin-bottom: 10px;
 }
 .about-details .right p{
   text-align: justify;
-  color: #0E2431;
+  color: #f1e1ff;
 }
 section .button{
   margin: 16px 0;
@@ -844,4 +865,12 @@ section .button button:hover{
   border-color: #4070f4;
   background-color: #fff;
   color: #4070f4;
+}
+
+.about{
+  z-index: 99;
+}
+
+section{
+  height: 100vh;
 }

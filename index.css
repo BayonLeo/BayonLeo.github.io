@@ -13,7 +13,7 @@ html {
   -ms-overflow-style: none;
 }
 
-.container {
+.containerstr {
   scroll-snap-type: y mandatory;
 }
 
@@ -29,6 +29,14 @@ html {
   background: linear-gradient(to bottom, #000000 0%, #08094c 100%);
 }
 
+.tools{
+  background: linear-gradient(to bottom, #08094c 0%, #000000 100%);
+}
+
+.contact{
+  background: linear-gradient(to bottom, #000000 0%, #26084c 100%);
+}
+
 .home, .about, .projects {
   width: 100%;
 }
@@ -38,6 +46,7 @@ section .content{
   margin: auto;
   padding-top: 5%;
   font-family: 'Poppins', sans-serif;
+  z-index: 1;
 }
 
 .about .about-details{
@@ -655,7 +664,7 @@ body {
     }
   }
   
-  span {
+  .star {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -670,7 +679,7 @@ body {
     z-index: 1;
   }
   
-  span:before {
+  .star:before {
     content: '';
     position: absolute;
     top: 50%;
@@ -694,14 +703,14 @@ body {
     }
   }
   
-  span:nth-child(1) {
+  .star:nth-child(1) {
     top: 0;
     right: 0;
     animation-delay: 0;
     animation-duration: 1s;
   }
   
-  span:nth-child(2) {
+  .star:nth-child(2) {
     top: 0;
     right: 80px;
     left: initial;
@@ -709,7 +718,7 @@ body {
     animation-duration: 3s;
   }
   
-  span:nth-child(3) {
+  .star:nth-child(3) {
     top: 80px;
     right: 0px;
     left: initial;
@@ -717,7 +726,7 @@ body {
     animation-duration: 2s;
   }
   
-  span:nth-child(4) {
+  .star:nth-child(4) {
     top: 0px;
     right: 180px;
     left: initial;
@@ -725,7 +734,7 @@ body {
     animation-duration: 1.5s;
   }
   
-  span:nth-child(5) {
+  .star:nth-child(5) {
     top: 0px;
     right: 400px;
     left: initial;
@@ -733,7 +742,7 @@ body {
     animation-duration: 2.5s;
   }
   
-  span:nth-child(6) {
+  .star:nth-child(6) {
     top: 0px;
     right: 600px;
     left: initial;
@@ -741,7 +750,7 @@ body {
     animation-duration: 3s;
   }
   
-  span:nth-child(7) {
+  .star:nth-child(7) {
     top: 300px;
     right: 0px;
     left: initial;
@@ -749,7 +758,7 @@ body {
     animation-duration: 1.75s;
   }
   
-  span:nth-child(8) {
+  .star:nth-child(8) {
     top: 0px;
     right: 700px;
     left: initial;
@@ -757,7 +766,7 @@ body {
     animation-duration: 1.25s;
   }
   
-  span:nth-child(9) {
+  .star:nth-child(9) {
     top: 0px;
     right: 1000px;
     left: initial;
@@ -765,7 +774,7 @@ body {
     animation-duration: 2.25s;
   }
   
-  span:nth-child(10) {
+  .star:nth-child(10) {
     top: 0px;
     right: 450px;
     left: initial;
@@ -778,8 +787,8 @@ body {
     z-index: 1;
     top: 40%;
     text-align: center;
-    
   }
+  
   .cursor {
     cursor: pointer; 
   }
@@ -814,7 +823,7 @@ section .title div::after{
   position: absolute;
   height: 3px;
   width: 100%;
-  background: #4070f4;
+  background: #001aff;
   left: 0;
   bottom: 0;
 }
@@ -855,16 +864,16 @@ section .button button{
   border-radius: 4px;
   font-size: 25px;
   font-weight: 400;
-  background: #4070f4;
+  background: #6c3baa;
   color: #fff;
   border: 2px solid transparent;
   cursor: pointer;
   transition: all 0.4s ease;
 }
 section .button button:hover{
-  border-color: #4070f4;
-  background-color: #fff;
-  color: #4070f4;
+  border-color: #6c3baa;
+  background-color: #000000;
+  color: #fff;
 }
 
 .about{
@@ -873,4 +882,218 @@ section .button button:hover{
 
 section{
   height: 100vh;
+}
+
+.area{
+  background: linear-gradient(to bottom, #000000 0%, #08094c 100%);
+  width: 100%;
+  height:100vh;
+  z-index: -1;
+}
+
+.circles{
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.circles li{
+  position: absolute;
+  display: block;
+  list-style: none;
+  width: 20px;
+  height: 20px;
+  animation: animateCubes 25s linear infinite;
+  bottom: -150px;
+  
+}
+
+.circles li:nth-child(1){
+  left: 25%;
+  background: rgba(0, 26, 255, 0.5);
+  width: 80px;
+  height: 80px;
+  animation-delay: 0s;
+}
+
+
+.circles li:nth-child(2){
+  left: 10%;
+  width: 20px;
+  background: rgba(255, 255, 255, 0.5);
+  height: 20px;
+  animation-delay: 2s;
+  animation-duration: 12s;
+}
+
+.circles li:nth-child(3){
+  left: 70%;
+  width: 20px;
+  background: rgba(0, 26, 255, 0.5);
+  height: 20px;
+  animation-delay: 4s;
+}
+
+.circles li:nth-child(4){
+  left: 40%;
+  width: 60px;
+  height: 60px;
+  background: rgba(255, 255, 255, 0.5);
+  animation-delay: 0s;
+  animation-duration: 18s;
+}
+
+.circles li:nth-child(5){
+  left: 65%;
+  width: 20px;
+  background: rgba(0, 26, 255, 0.5);
+  height: 20px;
+  animation-delay: 0s;
+}
+
+.circles li:nth-child(6){
+  left: 75%;
+  width: 110px;
+  background: rgba(255, 255, 255, 0.5);
+  height: 110px;
+  animation-delay: 3s;
+}
+
+.circles li:nth-child(7){
+  left: 35%;
+  width: 150px;
+  background: rgba(0, 26, 255, 0.5);
+  height: 150px;
+  animation-delay: 7s;
+}
+
+.circles li:nth-child(8){
+  left: 50%;
+  width: 25px;
+  background: rgba(255, 255, 255, 0.5);
+  height: 25px;
+  animation-delay: 15s;
+  animation-duration: 45s;
+}
+
+.circles li:nth-child(9){
+  left: 20%;
+  width: 15px;
+  height: 15px;
+  background: rgba(0, 26, 255, 0.5);
+  animation-delay: 2s;
+  animation-duration: 35s;
+}
+
+.circles li:nth-child(10){
+  left: 85%;
+  width: 150px;
+  background: rgba(255, 255, 255, 0.5);
+  height: 150px;
+  animation-delay: 0s;
+  animation-duration: 11s;
+}
+
+@keyframes animateCubes {
+
+  0%{
+      transform: translateY(0) rotate(0deg);
+      opacity: 1;
+      border-radius: 0;
+  }
+
+  100%{
+      transform: translateY(-1000px) rotate(720deg);
+      opacity: 0;
+      border-radius: 50%;
+  }
+
+}
+
+.containercar {
+  position: relative;
+  width: 320px;
+  margin: 100px auto 0 auto;
+  perspective: 1000px;
+}
+
+.carousel {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d; 
+  animation: rotate360 60s infinite forwards linear;
+}
+.carousel__face { 
+  position: absolute;
+  width: 300px;
+  height: 187px;
+  top: 20px;
+  left: 10px;
+  right: 10px;
+  background-size: cover;
+  background-position: 50%;
+  box-shadow:inset 0 0 0 2000px rgba(0,0,0,0.5);
+  display: flex;
+  box-shadow: 0 0 20px rgb(28, 5, 232);
+}
+
+.carimg {
+  margin: auto;
+  font-size: 2rem;
+  color: #f1e1ff;
+  will-change: opacity, transform;
+  text-shadow:
+      0 0 7px #fff,
+      0 0 14px #001aff,
+      0 0 25px #001aff,
+      0 0 35px #001aff,
+      0 0 42px #001aff,
+      0 0 82px #001aff,
+      0 0 92px #001aff,
+      0 0 102px #001aff,
+      0 0 151px #001aff;
+}
+
+
+.carousel__face:nth-child(1) {
+  background-image: url("https://i.pinimg.com/originals/68/43/cc/6843cc365df18febde115bc70eb15290.gif");
+  transform: rotateY(  0deg) translateZ(430px); }
+.carousel__face:nth-child(2) { 
+  background-image: url("https://i.pinimg.com/originals/2c/5c/e3/2c5ce3685b849230f1f843d868f74271.gif");
+    transform: rotateY( 40deg) translateZ(430px); }
+.carousel__face:nth-child(3) {
+  background-image: url("https://cdnb.artstation.com/p/assets/images/images/065/721/345/original/marco-massa-formica.gif?1691056912");
+  transform: rotateY( 80deg) translateZ(430px); }
+.carousel__face:nth-child(4) {
+  background-image: url("https://blog.amandaghassaei.com/2020/05/01/the-recursive-universe/metapixel.gif");
+  transform: rotateY(120deg) translateZ(430px); }
+.carousel__face:nth-child(5) { 
+  background-image: url("https://i.pinimg.com/originals/c4/37/12/c43712af49b76ffbf268dd254800624d.gif");
+ transform: rotateY(160deg) translateZ(430px); }
+.carousel__face:nth-child(6) { 
+  background-image: url("https://i.pinimg.com/originals/88/66/b2/8866b25a23afb5185612095ffc57eca3.gif");
+ transform: rotateY(200deg) translateZ(430px); }
+.carousel__face:nth-child(7) { 
+  background-image: url("https://i.pinimg.com/originals/c6/c1/1d/c6c11d8ba0b9f26caf0a6a8ee3a3e78e.gif");
+ transform: rotateY(240deg) translateZ(430px); }
+.carousel__face:nth-child(8) {
+  background-image: url("https://community.wolfram.com/c/portal/getImageAttachment?filename=AW567hgh1nop.gif&userId=11733");
+  transform: rotateY(280deg) translateZ(430px); }
+.carousel__face:nth-child(9) {
+  background-image: url("https://images.pexels.com/photos/1175135/pexels-photo-1175135.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260");
+  transform: rotateY(320deg) translateZ(430px); }
+
+
+
+@keyframes rotate360 {
+  from {
+    transform: rotateY(0deg);
+  }
+  to {
+    transform: rotateY(-360deg);
+  }
 }

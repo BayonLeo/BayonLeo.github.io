@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bayon Léo | DevOps Engineer</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --bg-color: #0f172a; /* Darker blue */
+      --text-color: #e2e8f0; /* Lighter text */
+      --accent-color: #7c3aed; /* Brighter purple */
+      --highlight-color: #6366f1; /* More vibrant blue */
+      --card-bg: rgba(30, 41, 59, 0.7); /* Semi-transparent dark card */
+      --button-bg: #7c3aed; /* Purple button */
+      --button-hover-bg: #6d28d9; /* Darker purple */
+      --glass-effect: rgba(30, 41, 59, 0.3); /* Glass effect color */
+      --neon-glow: 0 0 10px rgba(124, 58, 237, 0.7); /* Neon glow effect */
+    }
+
+    body.light-mode {
+      --bg-color: #f1f5f9; /* Light background */
+      --text-color: #334155; /* Dark text */
+      --accent-color: #6366f1; /* Blue accent */
+      --card-bg: rgba(255, 255, 255, 0.8); /* Semi-transparent white */
+      --button-bg: #6366f1; /* Blue button */
+      --button-hover-bg: #4f46e5; /* Darker blue */
+      --glass-effect: rgba(255, 255, 255, 0.5); /* Light glass effect */
+      --neon-glow: 0 0 10px rgba(99, 102, 241, 0.5); /* Subtler glow */
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      color: var(--text-color);
+      line-height: 1.6;
+      transition: all 0.5s ease;
+      min-height: 100vh;
+      overflow-x: hidden;
+      background: radial-gradient(circle at 10% 20%, rgba(30, 41, 59, 0.8) 0%, rgba(15, 23, 42, 1) 90%);
+    }
+
+    body.light-mode {
+      background: radial-gradient(circle at 10% 20%, rgba(226, 232, 240, 0.8) 0%, rgba(241, 245, 249, 1) 90%);
+    }
+
+    /* Floating particles background */
+    .particles {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    .particle {
+      position: absolute;
+      background-color: var(--accent-color);
+      border-radius: 50%;
+      opacity: 0.3;
+      animation: float linear infinite;
+    }
+
+    @keyframes float {
+      0% {
+        transform: translateY(0) translateX(0);
+      }
+      50% {
+        transform: translateY(-100px) translateX(100px);
+      }
+      100% {
+        transform: translateY(0) translateX(0);
+      }
+    }
+
+    /* Glass morphism effect */
+    .glass {
+      background: var(--glass-effect);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-radius: 1rem;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
+    }
+
+    /* Header with floating effect */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.5rem 3rem;
+      background: var(--glass-effect);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 100;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    body.light-mode header {
+      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    }
+
+    header.scrolled {
+      padding: 1rem 3rem;
+      backdrop-filter: blur(15px);
+      -webkit-backdrop-filter: blur(15px);
+    }
+
+    header h1 {
+      font-size: 2.2rem;
+      font-weight: 800;
+      background: linear-gradient(90deg, var(--accent-color), var(--highlight-color));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      transition: all 0.3s ease;
+      letter-spacing: -0.05rem;
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+    }
+
+    nav a {
+      color: var(--text-color);
+      text-decoration: none;
+      font-weight: 600;
+      text-transform: uppercase;
+      font-size: 0.9rem;
+      letter-spacing: 0.05rem;
+      position: relative;
+      padding: 0.5rem 0;
+      transition: all 0.3s ease;
+    }
+
+    nav a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--accent-color);
+      transition: width 0.3s ease;
+    }
+
+    nav a:hover::after {
+      width: 100%;
+    }
+
+    nav a:hover {
+      color: var(--accent-color);
+    }
+
+    /* Main content sections */
+    section {
+      padding: 8rem 2rem 4rem;
+      max-width: 1200px;
+      margin: auto;
+      position: relative;
+    }
+
+    .section-title {
+      font-size: 3rem;
+      font-weight: 800;
+      margin-bottom: 3rem;
+      position: relative;
+      display: inline-block;
+    }
+
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 0;
+      width: 60%;
+      height: 4px;
+      background: linear-gradient(90deg, var(--accent-color), transparent);
+      border-radius: 2px;
+    }
+
+    .about, .projects, .contact {
+      padding: 3rem;
+      margin-bottom: 3rem;
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .about::before, .projects::before, .contact::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(124, 58, 237, 0.1) 0%, transparent 70%);
+      z-index: -1;
+      opacity: 0;
+      transition: opacity 0.5s ease;
+    }
+
+    .about:hover::before, .projects:hover::before, .contact:hover::before {
+      opacity: 1;
+    }
+
+    .about:hover, .projects:hover, .contact:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--neon-glow);
+    }
+
+    .about p {
+      font-size: 1.2rem;
+      line-height: 1.8;
+      margin-bottom: 1.5rem;
+      max-width: 800px;
+    }
+
+    /* Skills grid */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .skill-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 1.5rem 1rem;
+      border-radius: 0.5rem;
+      background: rgba(124, 58, 237, 0.1);
+      transition: all 0.3s ease;
+    }
+
+    .skill-item:hover {
+      transform: translateY(-5px);
+      background: rgba(124, 58, 237, 0.2);
+      box-shadow: var(--neon-glow);
+    }
+
+    .skill-icon {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+      color: var(--accent-color);
+    }
+
+    .skill-name {
+      font-weight: 600;
+      font-size: 0.9rem;
+      text-align: center;
+    }
+
+    /* Projects grid */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .project-card {
+      position: relative;
+      overflow: hidden;
+      border-radius: 1rem;
+      transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+      height: 350px;
+    }
+
+    .project-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(transparent 60%, rgba(0, 0, 0, 0.7));
+      z-index: 1;
+    }
+
+    .project-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .project-info {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      padding: 2rem;
+      z-index: 2;
+      transform: translateY(20px);
+      transition: all 0.3s ease;
+      opacity: 0;
+    }
+
+    .project-card:hover .project-info {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    .project-card:hover .project-image {
+      transform: scale(1.1);
+    }
+
+    .project-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      color: white;
+    }
+
+    .project-desc {
+      font-size: 0.9rem;
+      margin-bottom: 1rem;
+      color: rgba(255, 255, 255, 0.8);
+    }
+
+    .project-link {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.5rem 1rem;
+      background: var(--accent-color);
+      color: white;
+      text-decoration: none;
+      border-radius: 50px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+
+    .project-link:hover {
+      background: white;
+      color: var(--accent-color);
+      transform: translateX(5px);
+    }
+
+    .project-link i {
+      margin-left: 0.5rem;
+      transition: transform 0.3s ease;
+    }
+
+    .project-link:hover i {
+      transform: translateX(3px);
+    }
+
+    /* Contact section */
+    .contact-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .contact p {
+      font-size: 1.2rem;
+      margin-bottom: 2rem;
+      max-width: 600px;
+    }
+
+    .cta-btn {
+      display: inline-flex;
+      align-items: center;
+      padding: 1rem 2.5rem;
+      background: linear-gradient(135deg, var(--accent-color), var(--highlight-color));
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+      border-radius: 50px;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(124, 58, 237, 0.3);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+      transition: all 0.5s ease;
+    }
+
+    .cta-btn:hover::before {
+      left: 100%;
+    }
+
+    .cta-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(124, 58, 237, 0.4);
+    }
+
+    .social-links {
+      display: flex;
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .social-link {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: rgba(124, 58, 237, 0.1);
+      color: var(--accent-color);
+      font-size: 1.5rem;
+      transition: all 0.3s ease;
+    }
+
+    .social-link:hover {
+      background: var(--accent-color);
+      color: white;
+      transform: translateY(-5px);
+      box-shadow: var(--neon-glow);
+    }
+
+    /* Floating toggle button */
+    .toggle-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 50px;
+      height: 50px;
+      background: var(--accent-color);
+      color: white;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 1.2rem;
+      box-shadow: 0 4px 15px rgba(124, 58, 237, 0.3);
+      transition: all 0.3s ease;
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      z-index: 1000;
+    }
+
+    .toggle-btn:hover {
+      transform: scale(1.1) rotate(30deg);
+      box-shadow: 0 8px 25px rgba(124, 58, 237, 0.4);
+    }
+
+    /* Animated background elements */
+    .bg-element {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(60px);
+      opacity: 0.15;
+      z-index: -1;
+    }
+
+    .bg-element-1 {
+      width: 300px;
+      height: 300px;
+      background: var(--accent-color);
+      top: 10%;
+      left: 5%;
+      animation: float 8s ease-in-out infinite;
+    }
+
+    .bg-element-2 {
+      width: 400px;
+      height: 400px;
+      background: var(--highlight-color);
+      bottom: 10%;
+      right: 5%;
+      animation: float 10s ease-in-out infinite reverse;
+    }
+
+    /* Animations */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0) translateX(0); }
+      50% { transform: translateY(-20px) translateX(20px); }
+      100% { transform: translateY(0) translateX(0); }
+    }
+
+    /* Responsive design */
+    @media (max-width: 768px) {
+      header {
+        padding: 1rem;
+        flex-direction: column;
+        gap: 1rem;
+      }
+      
+      nav {
+        gap: 1rem;
+      }
+      
+      .section-title {
+        font-size: 2rem;
+      }
+      
+      .about, .projects, .contact {
+        padding: 2rem 1.5rem;
+      }
+      
+      .projects-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      section {
+        padding: 6rem 1rem 2rem;
+      }
+    }
+
+    /* Smooth scrolling */
+    html {
+      scroll-behavior: smooth;
+    }
+
+    /* Custom scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: var(--bg-color);
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: var(--accent-color);
+      border-radius: 4px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--button-hover-bg);
+    }
+  </style>
+</head>
+<body>
+  <!-- Floating background particles -->
+  <div class="particles" id="particles"></div>
+  
+  <!-- Background elements for depth -->
+  <div class="bg-element bg-element-1"></div>
+  <div class="bg-element bg-element-2"></div>
+
+  <!-- Glass morphism header -->
+  <header id="header">
+    <h1>Bayon Léo</h1>
+    <nav>
+      <a href="#about">About</a>
+      <a href="#projects">Projects</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <!-- Dark/light mode toggle -->
+  <button class="toggle-btn" id="modeToggle">
+    <i class="fas fa-moon"></i>
+  </button>
+
+  <!-- About section -->
+  <section id="about">
+    <h2 class="section-title">About Me</h2>
+    <div class="about glass">
+      <p>I'm a passionate <span class="highlight">DevOps Engineer</span> with expertise in building scalable, efficient systems and automating workflows. With 2 years of hands-on experience, I bridge the gap between development and operations to deliver seamless digital experiences.</p>
+      <p>My journey in tech has equipped me with a diverse skill set across multiple programming languages and tools, allowing me to approach problems from different perspectives and craft innovative solutions.</p>
+      
+      <!-- Download CV Button -->
+      <div style="margin-top: 2rem; text-align: center;">
+        <a href="path/to/your-cv.pdf" download class="cta-btn" style="display: inline-flex; align-items: center;">
+          <i class="fas fa-download" style="margin-right: 8px;"></i> Download CV
+        </a>
+      </div>
+
+      <h3 style="margin-top: 2rem; color: var(--accent-color);">My Skills</h3>
+      <div class="skills-grid">
+        <div class="skill-item glass">
+          <div class="skill-icon"><i class="fab fa-java"></i></div>
+          <span class="skill-name">Java</span>
+        </div>
+        <div class="skill-item glass">
+          <div class="skill-icon"><i class="fab fa-js"></i></div>
+          <span class="skill-name">JavaScript</span>
+        </div>
+        <div class="skill-item glass">
+          <div class="skill-icon"><i class="fab fa-html5"></i></div>
+          <span class="skill-name">HTML/CSS</span>
+        </div>
+        <div class="skill-item glass">
+          <div class="skill-icon"><i class="fab fa-golang"></i></div>
+          <span class="skill-name">GoLang</span>
+        </div>
+        <div class="skill-item glass">
+          <div class="skill-icon"><i class="fab fa-linux"></i></div>
+          <span class="skill-name">Linux</span>
+        </div>
+        <div class="skill-item glass">
+          <div class="skill-icon"><i class="fas fa-code"></i></div>
+          <span class="skill-name">C</span>
+        </div>
+        <div class="skill-item glass">
+          <div class="skill-icon"><i class="fab fa-git-alt"></i></div>
+          <span class="skill-name">Git</span>
+        </div>
+        <div class="skill-item glass">
+          <div class="skill-icon"><i class="fab fa-docker"></i></div>
+          <span class="skill-name">Docker</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects section -->
+  <section id="projects">
+    <h2 class="section-title">My Projects</h2>
+    <div class="projects-grid">
+      <div class="project-card glass">
+        <img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80" alt="Forum Go" class="project-image">
+        <div class="project-info">
+          <h3 class="project-title">Forum Go</h3>
+          <p class="project-desc">A high-performance forum application built with GoLang featuring user authentication and real-time updates.</p>
+          <a href="https://github.com/BayonLeo/forum-go" target="_blank" class="project-link">
+            View Project <i class="fas fa-arrow-right"></i>
+          </a>
+        </div>
+      </div>
+      
+      <div class="project-card glass">
+        <img src="https://images.unsplash.com/photo-1635070041078-e363dbe005cb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Game of Life" class="project-image">
+        <div class="project-info">
+          <h3 class="project-title">Game of Life</h3>
+          <p class="project-desc">Conway's Game of Life implemented in GoLang with interactive controls and visualization.</p>
+          <a href="#" class="project-link">
+            Coming Soon <i class="fas fa-hourglass-half"></i>
+          </a>
+        </div>
+      </div>
+      
+      <div class="project-card glass">
+        <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Pac-Man" class="project-image">
+        <div class="project-info">
+          <h3 class="project-title">Pac-Man</h3>
+          <p class="project-desc">Classic Pac-Man game rebuilt with modern JavaScript, featuring responsive design and score tracking.</p>
+          <a href="https://github.com/Ekphrasys/Pac-Man" target="_blank" class="project-link">
+            View Project <i class="fas fa-arrow-right"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact section -->
+  <section id="contact">
+    <h2 class="section-title">Get In Touch</h2>
+    <div class="contact glass">
+      <div class="contact-content">
+        <p>I'm currently looking for new opportunities and would love to hear from you. Whether you have a question or just want to say hi, I'll do my best to get back to you!</p>
+        <a href="mailto:mail.leo.bayon@gmail.com" class="cta-btn">
+          <i class="fas fa-paper-plane" style="margin-right: 0.5rem;"></i> Send Message
+        </a>
+        <div class="social-links">
+          <a href="https://github.com/BayonLeo" target="_blank" class="social-link">
+            <i class="fab fa-github"></i>
+          </a>
+          <a href="https://www.linkedin.com/in/léo-bayon-71bb83329/" target="_blank" class="social-link">
+            <i class="fab fa-linkedin-in"></i>
+          </a>
+          <a href="mailto:mail.leo.bayon@gmail.com" class="social-link">
+            <i class="fas fa-envelope"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    // Dark/light mode toggle
+    const modeToggle = document.getElementById('modeToggle');
+    
+    modeToggle.addEventListener('click', () => {
+      document.body.classList.toggle('light-mode');
+      
+      const icon = modeToggle.querySelector('i');
+      if (document.body.classList.contains('light-mode')) {
+        icon.classList.replace('fa-moon', 'fa-sun');
+      } else {
+        icon.classList.replace('fa-sun', 'fa-moon');
+      }
+    });
+
+    // Header scroll effect
+    window.addEventListener('scroll', () => {
+      const header = document.getElementById('header');
+      if (window.scrollY > 50) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+    });
+
+    // Create floating particles
+    function createParticles() {
+      const particlesContainer = document.getElementById('particles');
+      const particleCount = 30;
+      
+      for (let i = 0; i < particleCount; i++) {
+        const particle = document.createElement('div');
+        particle.classList.add('particle');
+        
+        // Random properties
+        const size = Math.random() * 5 + 2;
+        const posX = Math.random() * 100;
+        const posY = Math.random() * 100;
+        const delay = Math.random() * 5;
+        const duration = Math.random() * 10 + 10;
+        
+        particle.style.width = `${size}px`;
+        particle.style.height = `${size}px`;
+        particle.style.left = `${posX}%`;
+        particle.style.top = `${posY}%`;
+        particle.style.animationDelay = `${delay}s`;
+        particle.style.animationDuration = `${duration}s`;
+        
+        particlesContainer.appendChild(particle);
+      }
+    }
+    
+    // Initialize particles when page loads
+    window.addEventListener('load', createParticles);
+
+    // Animate elements when they come into view
+    const animateOnScroll = () => {
+      const elements = document.querySelectorAll('.about, .project-card, .contact');
+      
+      elements.forEach(element => {
+        const elementPosition = element.getBoundingClientRect().top;
+        const screenPosition = window.innerHeight / 1.3;
+        
+        if (elementPosition < screenPosition) {
+          element.style.animation = 'fadeIn 0.8s ease-out forwards';
+        }
+      });
+    };
+    
+    window.addEventListener('scroll', animateOnScroll);
+    // Trigger once on load
+    animateOnScroll();
+  </script>
+</body>
+</html>

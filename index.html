@@ -36,6 +36,78 @@
       --tertiary-accent: #f59e0b; /* Amber */
     }
 
+    .glass:hover {
+  animation: pulse 2s infinite;
+}
+
+/* Add gradient borders */
+.skill-item {
+  position: relative;
+  overflow: hidden;
+}
+
+.skill-item::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(45deg, 
+    var(--accent-color), 
+    var(--secondary-accent), 
+    var(--tertiary-accent));
+  z-index: -1;
+  border-radius: 0.5rem;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.skill-item:hover::before {
+  opacity: 1;
+}
+
+.animated-gradient-text {
+  background: linear-gradient(90deg, 
+    var(--accent-color), 
+    var(--secondary-accent), 
+    var(--tertiary-accent), 
+    var(--accent-color));
+  background-size: 300% 300%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradientShift 8s ease infinite;
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.custom-cursor {
+  position: fixed;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: rgba(124, 58, 237, 0.3);
+  border: 2px solid var(--accent-color);
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  transition: 
+    width 0.3s ease, 
+    height 0.3s ease, 
+    background 0.3s ease;
+}
+
+.cursor-active {
+  width: 40px;
+  height: 40px;
+  background: rgba(124, 58, 237, 0.1);
+}
+
     * {
       margin: 0;
       padding: 0;
@@ -96,6 +168,80 @@
       border: 1px solid rgba(255, 255, 255, 0.1);
       box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
     }
+
+    .project-toggle-container {
+    display: flex;
+    gap: 0.5rem;
+    margin-left: 1rem;
+    background: var(--glass-effect);
+    backdrop-filter: blur(10px);
+    padding: 0.5rem;
+    border-radius: 50px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  body.light-mode .project-toggle-container {
+    border: 1px solid rgba(0, 0, 0, 0.1);
+  }
+
+  .project-toggle-btn {
+    padding: 0.5rem 1.5rem;
+    background: transparent;
+    color: var(--text-color);
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    text-transform: uppercase;
+    letter-spacing: 0.05rem;
+  }
+
+  .project-toggle-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, var(--accent-color), var(--highlight-color));
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    border-radius: 50px;
+  }
+
+  .project-toggle-btn.active {
+    color: white;
+  }
+
+  .project-toggle-btn.active::before {
+    opacity: 1;
+  }
+
+  .project-toggle-btn:not(.active):hover {
+    color: var(--accent-color);
+  }
+
+  .project-toggle-btn::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 2px;
+    background: var(--accent-color);
+    transition: width 0.3s ease;
+  }
+
+  .project-toggle-btn:not(.active):hover::after {
+    width: 70%;
+  }
 
     /* Header with floating effect */
     header {
@@ -809,76 +955,113 @@
   </section>
 
   <!-- Projects section -->
-  <section id="projects">
+<section id="projects">
+  <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 2rem;">
     <h2 class="section-title">My Projects</h2>
-    <div class="projects-grid">
-      <div class="project-card glass">
-        <img src="ressources/Logo.png" alt="Forum Go" class="project-image">
-        <div class="project-info">
-          <h3 class="project-title">Aniverse</h3>
-          <p class="project-desc">A high-performance forum application built with GoLang featuring user authentication and real-time updates.</p>
-          <a href="https://github.com/BayonLeo/forum-go" target="_blank" class="project-link">
-            View Project <i class="fas fa-arrow-right"></i>
-          </a>
-        </div>
-      </div>
-      
-      <div class="project-card glass">
-        <img src="https://blog.amandaghassaei.com/2020/05/01/the-recursive-universe/metapixel.gif" alt="Game of Life" class="project-image">
-        <div class="project-info">
-          <h3 class="project-title">Game of Life</h3>
-          <p class="project-desc">Conway's Game of Life implemented in GoLang with interactive controls and visualization.</p>
-          <a href="#" class="project-link">
-            Coming Soon <i class="fas fa-hourglass-half"></i>
-          </a>
-        </div>
-      </div>
+    <div class="project-toggle-container">
+      <button class="project-toggle-btn active" data-category="school">School</button>
+      <button class="project-toggle-btn" data-category="personal">Personal</button>
+    </div>
+  </div>
+  
+  <!-- School Projects -->
+  <div class="projects-grid school-projects">
+    <!-- Your existing school projects here -->
 
-      <div class="project-card glass">
-        <img src="ressources/MINIA_JEU.png" alt="Rolex Racing Tycoon" class="project-image">
-        <div class="project-info">
-          <h3 class="project-title">Roblox Racing Tycoon</h3>
-          <p class="project-desc">A Proof of concept Roblex game centered around the brand roblox made in 5 days.</p>
-          <a href="https://www.roblox.com/games/98819646411922/Rolex-Racing-Tycoon#!/about" target="_blank" class="project-link">
-            View Project <i class="fas fa-arrow-right"></i>
-          </a>
-        </div>
-      </div>
-
-      <div class="project-card glass">
-        <img src="https://i.pinimg.com/originals/88/9c/29/889c29518ed5a0419f0221a3be8581bd.gif" alt="Lem-in" class="project-image">
-        <div class="project-info">
-          <h3 class="project-title">Lem-in</h3>
-          <p class="project-desc">A simple pathfinding algorithm allowing ants to pass through tunnels.</p>
-          <a href="https://github.com/BayonLeo/lem-in" target="_blank" class="project-link">
-            View Project <i class="fas fa-arrow-right"></i>
-          </a>
-        </div>
-      </div>
-
-      <div class="project-card glass">
-        <img src="ressources/AW567hgh1nop.gif" alt="Wireworld" class="project-image">
-        <div class="project-info">
-          <h3 class="project-title">WireWorld</h3>
-          <p class="project-desc">implementation of the famous cellular automaton WireWorld featuring map making and a pause system.</p>
-          <a href="" target="_blank" class="project-link">
-            Coming Soon <i class="fas fa-hourglass-half"></i>
-          </a>
-        </div>
-      </div>
-      
-      <div class="project-card glass">
-        <img src="https://media.tenor.com/llSAvv3PxdAAAAAM/pacman-namco.gif" alt="Pac-Man" class="project-image">
-        <div class="project-info">
-          <h3 class="project-title">Pac-Man</h3>
-          <p class="project-desc">Classic Pac-Man game rebuilt with modern JavaScript, featuring responsive design and score tracking.</p>
-          <a href="https://github.com/Ekphrasys/Pac-Man" target="_blank" class="project-link">
-            View Project <i class="fas fa-arrow-right"></i>
-          </a>
-        </div>
+    <div class="project-card glass" data-category="school">
+      <img src="https://media.tenor.com/llSAvv3PxdAAAAAM/pacman-namco.gif" alt="Pac-Man" class="project-image">
+      <div class="project-info">
+        <h3 class="project-title">Pac-Man</h3>
+        <p class="project-desc">Classic Pac-Man game rebuilt with modern JavaScript, featuring responsive design and score tracking.</p>
+        <a href="https://github.com/Ekphrasys/Pac-Man" target="_blank" class="project-link">
+          View Project <i class="fas fa-arrow-right"></i>
+        </a>
       </div>
     </div>
-  </section>
+
+    <div class="project-card glass" data-category="school">
+      <img src="" alt="Real-Time-Forum" class="project-image">
+      <div class="project-info">
+        <h3 class="project-title">Real-Time-Forum</h3>
+        <p class="project-desc">A high-performance forum application built with GoLang and JavaScript featuring user authentication and real-time updates and chat.</p>
+        <a href="https://github.com/Ekphrasys/Pac-Man" target="_blank" class="project-link">
+          View Project <i class="fas fa-arrow-right"></i>
+        </a>
+      </div>
+    </div>
+
+    <div class="project-card glass" data-category="school">
+      <video src="ressources/Enregistrement 2025-05-07 110143.mp4" alt="GraphQl" class="project-image" autoplay muted loop playsinline></video>
+      <div class="project-info">
+        <h3 class="project-title">GraphQl</h3>
+        <p class="project-desc">Classic Pac-Man game rebuilt with modern JavaScript, featuring responsive design and score tracking.</p>
+        <a href="https://github.com/BayonLeo/graphql" target="_blank" class="project-link">
+          View Project <i class="fas fa-arrow-right"></i>
+        </a>
+      </div>
+    </div>
+
+    <div class="project-card glass" data-category="school">
+      <img src="ressources/image.png" alt="Forum Go" class="project-image">
+      <div class="project-info">
+        <h3 class="project-title">Aniverse</h3>
+        <p class="project-desc">A high-performance forum application built with GoLang featuring user authentication and moderation.</p>
+        <a href="https://github.com/BayonLeo/forum-go" target="_blank" class="project-link">
+          View Project <i class="fas fa-arrow-right"></i>
+        </a>
+      </div>
+    </div>
+
+    <div class="project-card glass" data-category="school">
+      <video src="ressources/2025-04-03_16-30-01.mp4" alt="Roblox Racing Tycoon" class="project-image" autoplay muted loop playsinline></video>
+      <div class="project-info">
+        <h3 class="project-title">Roblox Racing Tycoon</h3>
+        <p class="project-desc">A Proof of concept Roblex game centered around the brand roblox made in 5 days.</p>
+        <a href="https://www.roblox.com/games/98819646411922/Rolex-Racing-Tycoon#!/about" target="_blank" class="project-link">
+          View Project <i class="fas fa-arrow-right"></i>
+        </a>
+      </div>
+    </div>
+
+    <div class="project-card glass" data-category="school">
+      <img src="https://i.pinimg.com/originals/88/9c/29/889c29518ed5a0419f0221a3be8581bd.gif" alt="Lem-in" class="project-image">
+      <div class="project-info">
+        <h3 class="project-title">Lem-in</h3>
+        <p class="project-desc">A simple pathfinding algorithm allowing ants to pass through tunnels.</p>
+        <a href="https://github.com/BayonLeo/lem-in" target="_blank" class="project-link">
+          View Project <i class="fas fa-arrow-right"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Personal Projects -->
+  <div class="projects-grid personal-projects" style="display: none;">
+    <!-- Your existing personal projects here -->
+
+    <div class="project-card glass" data-category="personal">
+      <img src="https://blog.amandaghassaei.com/2020/05/01/the-recursive-universe/metapixel.gif" alt="Game of Life" class="project-image">
+      <div class="project-info">
+        <h3 class="project-title">Game of Life</h3>
+        <p class="project-desc">Conway's Game of Life implemented in GoLang with interactive controls and visualization.</p>
+        <a href="#" class="project-link">
+          Coming Soon <i class="fas fa-hourglass-half"></i>
+        </a>
+      </div>
+    </div>
+
+    <div class="project-card glass" data-category="personal">
+      <img src="ressources/AW567hgh1nop.gif" alt="Wireworld" class="project-image">
+      <div class="project-info">
+        <h3 class="project-title">WireWorld</h3>
+        <p class="project-desc">implementation of the famous cellular automaton WireWorld featuring map making and a pause system.</p>
+        <a href="" target="_blank" class="project-link">
+          Coming Soon <i class="fas fa-hourglass-half"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
 
   <!-- Contact section -->
   <section id="contact">
@@ -905,6 +1088,16 @@
   </section>
 
   <script>
+    document.querySelectorAll('.project-toggle-btn.active').forEach(btn => {
+  btn.addEventListener('mousemove', (e) => {
+    const rect = btn.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    
+    btn.style.setProperty('--mouse-x', `${x}px`);
+    btn.style.setProperty('--mouse-y', `${y}px`);
+  });
+});
     // Dark/light mode toggle
     const modeToggle = document.getElementById('modeToggle');
     
@@ -928,6 +1121,38 @@
         header.classList.remove('scrolled');
       }
     });
+
+    // Project category toggle
+const toggleButtons = document.querySelectorAll('.project-toggle-btn');
+const schoolProjects = document.querySelector('.school-projects');
+const personalProjects = document.querySelector('.personal-projects');
+
+toggleButtons.forEach(button => {
+  button.addEventListener('click', () => {
+    // Update active state of buttons
+    toggleButtons.forEach(btn => btn.classList.remove('active'));
+    button.classList.add('active');
+    
+    // Show/hide projects
+    const category = button.dataset.category;
+    if (category === 'school') {
+      schoolProjects.style.display = 'grid';
+      personalProjects.style.display = 'none';
+    } else {
+      schoolProjects.style.display = 'none';
+      personalProjects.style.display = 'grid';
+    }
+    
+    // Re-trigger animations
+    const projects = document.querySelectorAll('.project-card');
+    projects.forEach(project => {
+      project.style.animation = 'none';
+      setTimeout(() => {
+        project.style.animation = 'fadeIn 0.8s ease-out forwards';
+      }, 10);
+    });
+  });
+});
 
     // Create floating particles
     // Modify your createParticles function
